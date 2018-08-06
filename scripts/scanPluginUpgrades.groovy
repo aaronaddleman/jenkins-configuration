@@ -23,7 +23,7 @@ public static String formatWarning(warning) {
 }
 
 public static void main(String[] args) {
-    Jenkins jenkins = Jenkins.getInstance()
+    Jenkins jenkins = Jenkins.getInstanceOrNull()
     def warnings = getSecurityWarnings(jenkins)
     warnings.each { warning ->
         println(formatWarning(warning))
