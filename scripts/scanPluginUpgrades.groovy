@@ -10,9 +10,9 @@ import jenkins.security.UpdateSiteWarningsConfiguration
 
 // Return a list of Security Warnings from the Jenkins update center
 // that are pertinent to the plugins installed in this Jenkins instance
-public Set getSecurityWarnings(Jenkins jenkins) {
-    jenkins.pluginManager.doCheckUpdatesServer()
-    Set warnings = jenkins.getExtensionList(UpdateSiteWarningsConfiguration.class).get(0).getApplicableWarnings()
+public Set getSecurityWarnings() {
+    UpdateSiteWarningsConfiguration up = new  UpdateSiteWarningsConfiguration()
+    Set warnings = up.getApplicableWarnings()
     return warnings
 }
 
@@ -23,8 +23,7 @@ public static String formatWarning(warning) {
 }
 
 public static void main(String[] args) {
-    Jenkins jenkins = Jenkins.get()
-    def warnings = getSecurityWarnings(jenkins)
+    def warnings = getSecurityWarnings()
     warnings.each { warning ->
         println(formatWarning(warning))
     }
